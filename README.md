@@ -18,21 +18,44 @@ Kernel is written in rust
 
 #
 
-## [Supported]
+## [Bootloader Features]
 <h3>
 
 Multiboot<br><br>
-Longmode (x86_64 bits)<br><br>
+Real Mode (16 bits)<br><br>
+Pagging
+Global Descriptor Table loading<br><br>
+Protected Mode(x86 32bits)<br><br>
+Long Mode (x86_64 bits)<br><br>
+Copy Kernel from disk to Protected Memory<br><br>
 Stack Mem<br><br>
-VGA Text Driver<br><br>
 </h3>
 
 #
 
-![Jokes Card](https://readme-jokes.vercel.app/api?theme=tokyonight)
+## [Kernel Features]
+
+<p>
+
+idk
+ipk
+iok
+
+</p>
 
 #
 
+## [Next Plans]
+
+<h3>
+
+Keyboard Driver
+
+</h3>
+
+![Jokes Card](https://readme-jokes.vercel.app/api?theme=tokyonight)
+
+#
 ## Contributors
 
 <a href="https://github.com/Walker-00/chaos/graphs/contributors">
