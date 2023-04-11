@@ -23,4 +23,7 @@ build:
 run:
 	qemu-system-x86_64 -cdrom $(iso)
 
+clean:
+	rm -rf build kernel.bin chaos.iso build bootloader/*.o
+	cargo clean
 

@@ -1,6 +1,8 @@
 <div align="center">
 
-# Chaos(Cha-Os)
+# Chaos (Cha-Os)
+
+#
 
 <div>
 <img alt="GitHub" src="https://img.shields.io/github/license/Walker-00/chaos?color=red&style=flat-square">
@@ -8,12 +10,15 @@
 <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Walker-00/chaos?color=red&logo=github&style=flat-square">
 </div>
 
+#
+
 <h3>
 
 Just a fun project to build an Operating System from fully scratch with rust
 
 Bootloader is written is assembly and
 Kernel is written in rust
+
 </h3>
 
 #
@@ -36,28 +41,55 @@ Kernel is written in rust
 
 ## [Kernel Features]
 
-<p>
+<h3>
 
-idk
-ipk
-iok
+- VGA Driver
+- print! and println! macros to write text to VGF text buffer
 
-</p>
+</h3>
 
 #
 
-## [Next Plans]
+## [More To Come]
 
 <h3>
 
-Keyboard Driver
+- Keyboard Driver
+- CPU exceptions handler
+- Programmable Interrupt Controller Driver
+- Keyboard Driver 
 
 </h3>
+
+#
+
+## [Building]
+
+```
+git clone https://github.com/Walker-00/chaos
+cd chaos
+make build
+make run
+```
+
+#
+
+## [Note]
+
+<h4>
+
+If you got some issues like header missing or multiboot header missing!<br>
+Please run make clean and make build in different shell.<br>
+Or If you got any other issues please report me.
+
+<h4>
+
+#
 
 ![Jokes Card](https://readme-jokes.vercel.app/api?theme=tokyonight)
 
 #
-## Contributors
+## [Contributors]
 
 <a href="https://github.com/Walker-00/chaos/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Walker-00/chaos" />
