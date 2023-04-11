@@ -31,5 +31,13 @@ VGA Text Driver<br><br>
 
 ![Jokes Card](https://readme-jokes.vercel.app/api?theme=tokyonight)
 
+#
+
+## Contributors
+
+<a href="https://github.com/Walker-00/chaos/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Walker-00/chaos" />
+</a>
+
 
 </div>
