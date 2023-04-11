@@ -21,14 +21,14 @@ Kernel is written in rust
 ## [Bootloader Features]
 <h3>
 
-Multiboot<br><br>
-Real Mode (16 bits)<br><br>
-Pagging
-Global Descriptor Table loading<br><br>
-Protected Mode(x86 32bits)<br><br>
-Long Mode (x86_64 bits)<br><br>
-Copy Kernel from disk to Protected Memory<br><br>
-Stack Mem<br><br>
+- Multiboot
+- Real Mode (16 bits)
+- Pagging
+- Global Descriptor Table loading
+- Protected Mode(x86 32bits)
+- Long Mode (x86_64 bits)
+- Copy Kernel from disk to Protected Memory
+- Stack Mem
 </h3>
 
 #
