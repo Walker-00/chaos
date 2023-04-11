@@ -1,8 +1,17 @@
+[profile.release]
+panic = "abort"
+
+
+[lib]
+crate-type = ["staticlib"]
+
+[profile.dev]
+panic = "abort"
+
 [package]
 name = "chaos"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+rlibc = "1.0.0"
