@@ -2,8 +2,6 @@
 
 # Chaos (Cha-Os)
 
-#
-
 <div>
 <img alt="GitHub" src="https://img.shields.io/github/license/Walker-00/chaos?color=red&style=flat-square">
 <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Walker-00/chaos?color=red&logo=rust&logoColor=red&style=flat-square">
