@@ -24,6 +24,7 @@ Kernel is written in rust
 - Multiboot
 - Real Mode (16 bits)
 - Pagging<br>
+- Memory Mapping
 - Global Descriptor Table loading
 - Protected Mode(x86 32bits)
 - Long Mode (x86_64 bits)
