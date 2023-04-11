@@ -16,14 +16,18 @@ Bootloader is written is assembly and
 Kernel is written in rust
 </h3>
 
+#
+
 ## [Supported]
 <h3>
 
-Multiboot<br>
-Longmode (x86_64 bits)<br>
-Stack Mem<br>
-VGA Text Driver<br>
+Multiboot<br><br>
+Longmode (x86_64 bits)<br><br>
+Stack Mem<br><br>
+VGA Text Driver<br><br>
 </h3>
+
+#
 
 ![Jokes Card](https://readme-jokes.vercel.app/api?theme=tokyonight)
 
