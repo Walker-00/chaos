@@ -1,4 +1,5 @@
-section .multiboot_header ; multiboot_header header
+section .multiboot_header_func ; multiboot_header header
+
 header_start:
 	dd 0xe85250d6 ; multiboot2 magic number
 	; architecture

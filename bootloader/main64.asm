@@ -3,7 +3,7 @@ section .text ; text section
 bits 64 ; 64 bits assembly
 long_mode_start: ; long mode start lable
     ; load null into all data segment registers
-    mov ax, 02
+    mov ax, 0
     mov ss, ax
     mov ds, ax
     mov es, ax
