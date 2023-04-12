@@ -1,6 +1,10 @@
 <div align="center">
 
+<img width=200px, height=200px, src="https://user-images.githubusercontent.com/85013114/231351066-e1670d3a-b786-4315-9d21-e260d0aed6d4.png"/>
+
 # Chaos (Cha-Os)
+
+
 
 <div>
 <img alt="GitHub" src="https://img.shields.io/github/license/Walker-00/chaos?color=red&style=flat-square">
