@@ -63,6 +63,30 @@ Kernel is written in rust
 
 ## [Building]
 
+<h4>
+
+- First You need to download and install Rustup!
+- Go to https://www.rust-lang.org for Rustup!
+
+- And we need nasm to compile assembly, grub for multiboot grub and qemu to run image.
+- Please install those first.
+
+- If you're done follow these steps.
+
+</h4>
+
+```
+rustup update nightly
+rustup default nightly
+rustup target add x86_64-unknown-none
+```
+<h4>
+
+- We use nightly to use unstable features of rust.
+- And add x86_64-unknown-none for 64 bits bare metal architecture.
+
+</h4>
+
 ```
 git clone https://github.com/Walker-00/chaos
 cd chaos
