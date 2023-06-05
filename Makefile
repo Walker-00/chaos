@@ -2,11 +2,17 @@ kernel := kernel.bin
 iso := chaos.iso
 build_type := debug
 rust_os := target/target/$(build_type)/libchaos.a
+rust_toolchain := nightly
 
 linker_scp := bootloader/linker.ld
 grub_cfg := bootloader/grub.cfg
 asm_src_files := $(wildcard bootloader/*.asm)
 asm_obj_files := bootloader/*.o
+
+setup:
+	rustup update $(rust_toolchain)
+	rustup default $(rust_toolchain)
+	rustup target add x86_64-unknown-none
 
 build:
 	cargo build

@@ -14,8 +14,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Run build
-      run: make build
+    - name: Rust Setup
+      run: make setup
 
-    - name: Run clean
-      run: make clean
+    - name: Build Rust Kernel and Bootloader
+      run: make build
+    
+  -name: Clean Project
+    run: make clean
