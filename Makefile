@@ -3,6 +3,8 @@ iso := chaos.iso
 build_type := debug
 rust_os := target/target/$(build_type)/libchaos.a
 rust_toolchain := nightly
+pkg_manager := pacman
+pkg_manager_option := -S
 
 linker_scp := bootloader/linker.ld
 grub_cfg := bootloader/grub.cfg
@@ -10,7 +12,7 @@ asm_src_files := $(wildcard bootloader/*.asm)
 asm_obj_files := bootloader/*.o
 
 setup:
-	sudo apt install nasm xorriso
+	sudo  $(pkg_manager) $(pkg_manager_option) nasm xorriso
 	rustup update $(rust_toolchain)
 	rustup default $(rust_toolchain)
 	rustup target add x86_64-unknown-none
