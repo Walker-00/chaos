@@ -10,6 +10,7 @@ asm_src_files := $(wildcard bootloader/*.asm)
 asm_obj_files := bootloader/*.o
 
 setup:
+	apt install nasm
 	rustup update $(rust_toolchain)
 	rustup default $(rust_toolchain)
 	rustup target add x86_64-unknown-none
