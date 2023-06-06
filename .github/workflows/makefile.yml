@@ -20,5 +20,5 @@ jobs:
     - name: Build Rust Kernel and Bootloader
       run: make build
     
-  -name: Clean Project
-    run: make clean
+    - name: Clean Project
+      run: make clean
