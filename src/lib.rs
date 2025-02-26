@@ -45,7 +45,7 @@ struct MultibootHeader {
 
 /// Place our multiboot header in a dedicated section so that the bootloader finds it.
 #[used]
-#[unsafe(link_section = ".multiboot_header")]
+#[unsafe(link_section = ".multiboot_header_func")]
 static MULTIBOOT_HEADER: MultibootHeader = {
     const MAGIC: u32 = 0xe85250d6;
     const ARCH: u32 = 0;

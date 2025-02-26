@@ -25,12 +25,13 @@ setup:
     rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu
 
 # Build task: Compile the Rust code and assemble bootloader files
+#ld -n --gc-sections -T {{linker_scp}} -o {{kernel}} {{asm_obj_files}} {{rust_os}}
 build:
     cargo build
     nasm -f elf64 bootloader/header.asm -o bootloader/header.o
     nasm -f elf64 bootloader/main.asm -o bootloader/main.o
     nasm -f elf64 bootloader/main64.asm -o bootloader/main64.o
-    ld -n --gc-sections -T {{linker_scp}} -o {{kernel}} {{asm_obj_files}} {{rust_os}}
+    ld -n --gc-sections -T {{linker_scp}} -o {{kernel}} {{rust_os}}
     
     # Create ISO directory structure
     /bin/mkdir -p build/iso/boot/grub
