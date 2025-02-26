@@ -4,7 +4,7 @@ iso                 := 'chaos.iso'
 
 # Build type and Rust OS target path
 build_type          := 'debug'
-rust_os             := 'target/target/$build_type/libchaos.a'
+rust_os             := 'target/target/'+ build_type + '/libchaos.a'
 
 # Package manager settings
 pkg_manager         := 'pacman'
