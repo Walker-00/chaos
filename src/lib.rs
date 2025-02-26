@@ -76,6 +76,7 @@ static MULTIBOOT_HEADER: MultibootHeader = {
 #[repr(align(16))]
 struct AlignedStack([u8; 16 * 1024]);
 
+#[used]
 static mut STACK: AlignedStack = AlignedStack([0; 16 * 1024]);
 
 // Page tables for the identity mapping.
