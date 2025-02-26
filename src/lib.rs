@@ -7,7 +7,7 @@ extern crate rlibc;
 
 mod vga;
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn kernel_start() -> ! {
     println!("Poop");
     loop {}
