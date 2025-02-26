@@ -2,11 +2,11 @@ ENTRY(_start)
 
 SECTIONS
 {
-    . = 1M; /* Load the kernel at 1MB */
+    . = 1M;  /* Kernel loads at 1MB */
 
-    .multiboot_header :
+    .multiboot_header ALIGN(8) :
     {
-        KEEP(*(.multiboot_header_func))
+        KEEP(*(.multiboot_header))
     }
 
     .text :
@@ -28,9 +28,5 @@ SECTIONS
     {
         *(.bss)
     }
-
-    /* Define kernel start and end */
-    _kernel_start = 1M;
-    _kernel_end = .;
 }
 

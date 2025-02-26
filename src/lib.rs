@@ -45,7 +45,7 @@ struct MultibootHeader {
 
 /// Place our multiboot header in a dedicated section so that the bootloader finds it.
 #[used]
-#[unsafe(link_section = ".multiboot_header_func")]
+#[unsafe(link_section = ".multiboot_header")]
 static MULTIBOOT_HEADER: MultibootHeader = {
     const MAGIC: u32 = 0xe85250d6;
     const ARCH: u32 = 0;
@@ -91,9 +91,20 @@ static mut PAGE_TABLE_L2: PageTable = PageTable([0; 512]);
 /// The 32-bit bootloader entry point.
 /// (Linker or a small assembly stub must call this function with the proper multiboot arguments.)
 #[unsafe(no_mangle)]
-pub extern "C" fn _start(multiboot_magic: u32, _multiboot_info: u32) -> ! {
-    // (Your startup assembly should have set up the stack already.)
-    check_multiboot(multiboot_magic);
+pub extern "C" fn _start() -> ! {
+    let magic: u32;
+    let info: u32;
+
+    unsafe {
+        core::arch::asm!(
+            "mov {0:e}, eax",  // Move the Multiboot magic number from eax
+            "mov {1:e}, ebx",  // Move the Multiboot info pointer from ebx
+            out(reg) magic,
+            out(reg) info
+        );
+    }
+
+    check_multiboot(magic);
     check_cpuid();
     check_long_mode();
 
@@ -103,11 +114,7 @@ pub extern "C" fn _start(multiboot_magic: u32, _multiboot_info: u32) -> ! {
     }
 
     load_gdt();
-
-    // Normally we would perform a far jump to 64-bit mode.
-    // For this Rust-only version (and since we can’t easily emit a far jump without asm),
-    // we simply call our long-mode entry function.
-    long_mode_start()
+    long_mode_start();
 }
 
 /// Verify that the multiboot magic number is correct.
