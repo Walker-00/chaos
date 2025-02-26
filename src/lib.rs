@@ -14,7 +14,7 @@ extern crate x86_64;
 use core::arch::x86_64::__cpuid;
 use core::mem::size_of;
 use core::ptr::write_volatile;
-use one_cell::sync::Lazy;
+use lazy_static::lazy_static;
 use raw_cpuid::CpuId;
 use x86_64::PhysAddr;
 use x86_64::instructions::hlt;
@@ -144,7 +144,7 @@ fn check_long_mode() {
     let cpuid = unsafe { __cpuid(0x80000001) };
 
     // Check if bit 29 (Long Mode) in EDX is set
-    if !(cpuid.edx & (1 << 29) != 0) {
+    if cpuid.edx & (1 << 29) == 0 {
         error(b'L');
     }
 }
@@ -185,12 +185,17 @@ unsafe fn enable_paging() {
     Cr0::write(cr0);
 }
 
-pub static GDT: Lazy<GlobalDescriptorTable> = Lazy::new(|| GlobalDescriptorTable::new());
+lazy_static! {
+    pub static ref GDT: GlobalDescriptorTable = {
+        let mut gdt = GlobalDescriptorTable::new();
+        gdt.append(Descriptor::kernel_code_segment());
+        gdt
+    };
+}
 
 /// Load a basic Global Descriptor Table (GDT).
 fn load_gdt() {
     // Add a kernel code segment descriptor.
-    GDT.append(Descriptor::kernel_code_segment());
     GDT.load();
 }
 
