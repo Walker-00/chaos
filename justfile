@@ -15,7 +15,7 @@ linker_scp          := 'bootloader/linker.ld'
 grub_cfg            := 'bootloader/grub.cfg'
 
 # Assembly source and object files
-asm_src_files       := 'bootloader/*.asm'
+#asm_src_files       := 'bootloader/*.asm'
 asm_obj_files       := 'bootloader/*.o'
 
 # Setup task: Install necessary dependencies and configure Rust
