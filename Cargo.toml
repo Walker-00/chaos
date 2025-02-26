@@ -18,10 +18,12 @@ edition = "2024"
 # run-command = ["qemu-system-x86_64", "-drive", "format=raw,file={}"]
 
 [dependencies]
+bootloader_api = "0.11.10"
 # bootloader = "0.11.10"
 lazy_static = { version = "1.4.0", features = ["spin_no_std"] }
 # once_cell = { version = "1.20.3", default-features = false, features = ["alloc"] }
 panic-halt = "0.2.0"
+pic8259 = "0.11.0"
 raw-cpuid = "11.4.0"
 rlibc = "1.0.0"
 spin = "0.9.8"
