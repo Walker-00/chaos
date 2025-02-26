@@ -44,7 +44,7 @@ build:
 
 # Run task: Boot the OS using QEMU emulator
 run:
-    qemu-system-x86_64 -cdrom {{iso}}
+    qemu-system-x86_64 -cdrom {{iso}} -serial stdio -d int,cpu_reset
 
 # Clean task: Remove build artifacts and object files
 clean:

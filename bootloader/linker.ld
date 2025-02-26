@@ -1,32 +1,16 @@
-ENTRY(_start)
+ENTRY(start)
 
 SECTIONS
 {
-    . = 1M;  /* Kernel loads at 1MB */
+	. = 1M;
 
-    .multiboot_header ALIGN(8) :
-    {
-        KEEP(*(.multiboot_header))
-    }
+	.boot :
+	{
+		KEEP(*(.multiboot_header_func))
+	}
 
-    .text :
-    {
-        *(.text)
-    }
-
-    .rodata :
-    {
-        *(.rodata)
-    }
-
-    .data :
-    {
-        *(.data)
-    }
-
-    .bss (NOLOAD) :
-    {
-        *(.bss)
-    }
+	.text :
+	{
+		*(.text)
+	}
 }
-
