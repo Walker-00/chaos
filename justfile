@@ -1,3 +1,8 @@
+alias s := setup
+alias r := run
+alias b := build
+alias d := debug
+
 # Kernel and ISO file names
 kernel              := 'kernel.bin'
 iso                 := 'chaos.iso'
@@ -31,7 +36,7 @@ build:
     nasm -f elf64 bootloader/header.asm -o bootloader/header.o
     nasm -f elf64 bootloader/main.asm -o bootloader/main.o
     nasm -f elf64 bootloader/main64.asm -o bootloader/main64.o
-    ld -n --gc-sections -T {{linker_scp}} -o {{kernel}} {{rust_os}}
+    ld -n --gc-sections -T {{linker_scp}} -o {{kernel}} {{asm_obj_files}} {{rust_os}}
     
     # Create ISO directory structure
     /bin/mkdir -p build/iso/boot/grub
@@ -44,6 +49,10 @@ build:
 
 # Run task: Boot the OS using QEMU emulator
 run:
+    qemu-system-x86_64 -cdrom {{iso}}
+
+# Debug task: Boot the OS using QEMU emulator in debug mode
+debug:
     qemu-system-x86_64 -cdrom {{iso}} -serial stdio -d int,cpu_reset
 
 # Clean task: Remove build artifacts and object files
