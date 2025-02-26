@@ -1,7 +1,5 @@
 #![no_std]
 #![no_main]
-#![feature(naked_functions)]
-#![allow(unsafe_op_in_unsafe_fn)]
 
 extern crate panic_halt;
 extern crate rlibc;
@@ -255,11 +253,6 @@ use x86_64::instructions::hlt;
 // // }
 //
 /// Halt the CPU in an infinite loop.
-
-// extern "C" {
-//     fn kernel_start();
-// }
-
 fn hlt_loop() -> ! {
     loop {
         hlt();
