@@ -15,6 +15,7 @@ edition = "2024"
 
 [dependencies]
 lazy_static = { version = "1.4.0", features = ["spin_no_std"] }
+once_cell = { version = "1.20.3", default-features = false, features = ["alloc"] }
 panic-halt = "0.2.0"
 raw-cpuid = "11.4.0"
 rlibc = "1.0.0"

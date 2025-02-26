@@ -14,11 +14,14 @@ extern crate x86_64;
 use core::arch::x86_64::__cpuid;
 use core::mem::size_of;
 use core::ptr::write_volatile;
+use one_cell::sync::Lazy;
 use raw_cpuid::CpuId;
+use x86_64::PhysAddr;
 use x86_64::instructions::hlt;
-use x86_64::registers::control::{Cr0, Cr0Flags, Cr3, Cr4, Cr4Flags};
+use x86_64::registers::control::{Cr0, Cr0Flags, Cr3, Cr3Flags, Cr4, Cr4Flags};
 use x86_64::registers::model_specific::{Efer, EferFlags};
 use x86_64::structures::gdt::{Descriptor, GlobalDescriptorTable};
+use x86_64::structures::paging::PhysFrame;
 
 //
 // 1. The Multiboot Header (replacing header.asm)
@@ -68,8 +71,12 @@ static MULTIBOOT_HEADER: MultibootHeader = {
 //
 
 // A 16KiB stack. (In a real setup you’ll want your crt0 to load ESP with the address of STACK’s top.)
+// #[repr(align(16))]
+// static mut STACK: [u8; 16 * 1024] = [0; 16 * 1024];
 #[repr(align(16))]
-static mut STACK: [u8; 16 * 1024] = [0; 16 * 1024];
+struct AlignedStack([u8; 16 * 1024]);
+
+static mut STACK: AlignedStack = AlignedStack([0; 16 * 1024]);
 
 // Page tables for the identity mapping.
 // We use a newtype that guarantees 4K alignment.
@@ -158,7 +165,9 @@ unsafe fn setup_page_tables() {
 /// Enable paging, PAE, and long mode.
 unsafe fn enable_paging() {
     // Load our L4 table address into CR3.
-    Cr3::write((&PAGE_TABLE_L4 as *const _ as u64).into());
+    // Cr3::write((&PAGE_TABLE_L4 as *const _ as u64).into());
+    let frame = PhysFrame::containing_address(PhysAddr::new(&PAGE_TABLE_L4 as *const _ as u64));
+    Cr3::write(frame, Cr3Flags::empty());
 
     // Enable Physical Address Extension (PAE) in CR4.
     let mut cr4 = Cr4::read();
@@ -176,12 +185,13 @@ unsafe fn enable_paging() {
     Cr0::write(cr0);
 }
 
+pub static GDT: Lazy<GlobalDescriptorTable> = Lazy::new(|| GlobalDescriptorTable::new());
+
 /// Load a basic Global Descriptor Table (GDT).
 fn load_gdt() {
-    let mut gdt = GlobalDescriptorTable::new();
     // Add a kernel code segment descriptor.
-    gdt.append(Descriptor::kernel_code_segment());
-    gdt.load();
+    GDT.append(Descriptor::kernel_code_segment());
+    GDT.load();
 }
 
 /// Write an error message (using VGA text memory) and halt.
