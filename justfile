@@ -1,18 +1,17 @@
-kernel := kernel.bin
-iso := chaos.iso
-build_type := debug
-rust_os := target/target/$build_type/libchaos.a
-rust_toolchain := nightly
-pkg_manager := pacman
-pkg_manager_option := -S
+kernel              := 'kernel.bin'
+iso                 := 'chaos.iso'
+build_type          := 'debug'
+rust_os             := 'target/target/$build_type/libchaos.a'
+pkg_manager         := 'pacman'
+pkg_manager_option  := '-S'
 
-linker_scp := bootloader/linker.ld
-grub_cfg := bootloader/grub.cfg
-asm_src_files := $wildcard bootloader/*.asm
-asm_obj_files := bootloader/*.o
+linker_scp          := 'bootloader/linker.ld'
+grub_cfg            := 'bootloader/grub.cfg'
+asm_src_files       := 'bootloader/*.asm'
+asm_obj_files       := 'bootloader/*.o'
 
 setup:
-	sudo  $pkg_manager $pkg_manager_option nasm xorriso
+	sudo  {{pkg_manager}} {{pkg_manager_option}} nasm xorriso
 	rustup target add x86_64-unknown-none
 	rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu
 
