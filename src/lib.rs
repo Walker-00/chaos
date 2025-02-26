@@ -152,9 +152,9 @@ fn check_long_mode() {
 /// Set up identity-mapped page tables using 2 MiB pages.
 unsafe fn setup_page_tables() {
     // Set L4[0] to point to the L3 table (with present and writable flags).
-    PAGE_TABLE_L4.0[0] = (&PAGE_TABLE_L3 as *const _ as u64) | 0b11;
+    PAGE_TABLE_L4.0[0] = (&raw const PAGE_TABLE_L3 as *const _ as u64) | 0b11;
     // Set L3[0] to point to the L2 table.
-    PAGE_TABLE_L3.0[0] = (&PAGE_TABLE_L2 as *const _ as u64) | 0b11;
+    PAGE_TABLE_L3.0[0] = (&raw const PAGE_TABLE_L2 as *const _ as u64) | 0b11;
 
     // Map the first 1GiB of memory in L2 using 2MiB pages.
     for i in 0..512 {
@@ -166,7 +166,8 @@ unsafe fn setup_page_tables() {
 unsafe fn enable_paging() {
     // Load our L4 table address into CR3.
     // Cr3::write((&PAGE_TABLE_L4 as *const _ as u64).into());
-    let frame = PhysFrame::containing_address(PhysAddr::new(&PAGE_TABLE_L4 as *const _ as u64));
+    let frame =
+        PhysFrame::containing_address(PhysAddr::new(&raw const PAGE_TABLE_L4 as *const _ as u64));
     Cr3::write(frame, Cr3Flags::empty());
 
     // Enable Physical Address Extension (PAE) in CR4.
