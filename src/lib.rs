@@ -1,10 +1,12 @@
 #![no_std]
 #![no_main]
 
-extern crate panic_halt;
+// extern crate panic_halt;
 extern crate rlibc;
 
 mod vga;
+use core::panic::PanicInfo;
+
 use x86_64::instructions::hlt;
 
 // We use these crates for safe register access and CPUID.
@@ -252,6 +254,14 @@ use x86_64::instructions::hlt;
 // //     hlt_loop();
 // // }
 //
+
+/// This function is called on panic.
+#[panic_handler]
+fn panic(info: &PanicInfo) -> ! {
+    println!("{}", info);
+    loop {}
+}
+
 /// Halt the CPU in an infinite loop.
 fn hlt_loop() -> ! {
     loop {
